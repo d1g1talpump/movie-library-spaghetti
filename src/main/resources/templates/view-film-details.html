@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cinephiles</title>
+    <link rel="stylesheet" href="/css/general.css" />
+    <link rel="stylesheet" href="/css/demo-form.css" />
+    <link rel="icon" href="/images/movie_search_icon_137377.svg" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header>
+      <h1 id="nav-title"><a href="/">Cinephiles</a></h1>
+      <nav>
+        <ul>
+          <li><a href="/films">Films</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <form action="/films" method="post">
+        <h1>Film Details</h1>
+        <ul class="flex-outer">
+          <li>
+            <label for="genre">Genre : </label>
+            <input
+              disabled
+              type="text"
+              name="genre"
+              id="genre"
+              required
+              data-th-value="${film.genre.label}"
+            />
+          </li>
+          <li>
+            <label for="year">Year : </label>
+            <input
+              disabled
+              type="text"
+              name="year"
+              id="year"
+              required
+              data-th-value="${film.year}"
+            />
+          </li>
+          <li>
+            <label for="title">Title : </label>
+            <input
+              disabled
+              type="text"
+              name="title"
+              id="title"
+              required
+              data-th-value="${film.title}"
+            />
+          </li>
+          <li>
+            <label for="director">Director : </label>
+            <input
+              disabled
+              type="text"
+              name="director"
+              id="director"
+              required
+              data-th-value="${film.director.firstName + ' ' + film.director.lastName}"
+            />
+          </li>
+          <li data-th-if="${not #lists.isEmpty(film.actors)}">
+            <label for="actors">Actors : </label>
+            <select disabled name="actors" id="actors" multiple>
+              <option
+                data-th-each="actor : ${film.actors}"
+                data-th-value="${actor}"
+                data-th-text="${'- ' + actor.firstName + ' ' + actor.lastName}"
+              ></option>
+            </select>
+          </li>
+          <!-- <li>
+            <label for="actors">Actors : </label
+            ><textarea
+              name="actors"
+              id="actors"
+              cols="30"
+              rows="10"
+              required
+              data-th-text="${lstActors}"
+            ></textarea>
+          </li> -->
+          <li>
+            <label for="synopsis">Synopsis : </label>
+            <textarea
+              disabled
+              name="synopsis"
+              id="synopsis"
+              cols="30"
+              rows="10"
+              required
+              data-th-text="${film.synopsis}"
+            ></textarea>
+          </li>
+        </ul>
+      </form>
+    </main>
+  </body>
+</html>
